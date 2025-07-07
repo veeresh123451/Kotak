@@ -1,0 +1,112 @@
+
+
+<!-- Rendering API data in the browser using the DOM -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="userdata">
+        FirtsName: <input type="text" id="firstName" placeholder="fname" required><br><br>
+        LastName: <input type="text" id="lastName" placeholder="lname" required><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <script>
+
+        const form = document.getElementById('userdata');
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+
+            const firstname = document.getElementById('firstName').value;
+            const lastname = document.getElementById('lastName').value;
+
+            const userdata = {firstname,lastname}
+
+            localStorage.setItem('user', JSON.stringify(userdata))
+            alert('User data saved in localstorage')
+            // form.reset()
+        })
+
+    </script>
+
+</body>
+</html>
+
+
+
+<!-- API integration methods using fetch and AJAX (using event handlers)  -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Example</title>
+</head>
+<body>
+    <h2>Api Integration</h2>
+    <button onclick="loadData()">Load User Data</button>
+    <div id="output"></div>
+
+    <script>
+        function loadData(){
+            fetch('https://fakestoreapi.in/api/products/category')
+            .then(response =>response.json())
+            .then(data => {
+                document.getElementById('output').innerHTML = 
+                `<p><strong>Status:</strong>${data.status}</p> 
+                <p><strong>Mesaage:</strong>${data.message}</p>`
+            })
+            .catch(error =console.log('Fething error:',error))
+            
+        }
+
+    </script>
+    
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX Example</title>
+</head>
+<body>
+  <h3>Using AJAX (XMLHttpRequest) </h3>
+  <button onclick="loadUser()">Load User</button>
+  <div id="output"></div>
+
+  <script>
+    function loadUser() {
+      const xhr = new XMLHttpRequest();
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText); 
+          document.getElementById("output").innerHTML = `
+            <p><strong>Id:</strong> ${data.id}</p>
+            <p><strong>Title:</strong> ${data.title}</p>
+          `;
+        }
+      };
+
+      xhr.open("GET", "https://fakestoreapi.com/products/1", true);
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
+
+
+
