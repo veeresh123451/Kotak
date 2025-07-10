@@ -259,25 +259,26 @@
 
 //----
 
-// function flattenArray(arr){
-//     let result = [];
+// function flatterArray(arr){
+// 		let result = []
+// 		let idx = 0
 
-//     for(let i=0; i<arr.length; i++){
-//         if(Array.isArray(arr[i])){
+// 		for(let i=0; i<arr.length; i++){
+// 			if(arr[i] && typeof arr[i] === 'object' && arr[i].constructor === Array){
+// 				let flat = flatterArray(arr[i])
 
-//             const flatSubArray = flattenArray(arr[i])
+// 				for(let j=0; j<flat.length; j++){
+// 						result[idx++] = flat[j]
+// 				}
+// 			}
+// 			else{
+// 					result[idx++] = arr[i]
+// 				}
+// 		}
+// 	return result
 
-//             for(let j=0; j<flatSubArray.length; j++){
-//                 result.push(flatSubArray[j])
-//             }
-//         }
-//         else{
-//                 result.push(arr[i])
-//             }
-//     }
-//     return result
 // }
-// console.log(flattenArray([1, [2, [3, [4]], 5], 6]));
+// console.log(flatterArray([1, [2, [3, [4]], 5], 6]));
 
 
 
